@@ -42,3 +42,6 @@ jobs:
           sudo su
           kubectl cluster-info
           kubectl get pods -A
+      - name: dependencies
+        run: |-
+          .github/scripts/dependencies.sh
