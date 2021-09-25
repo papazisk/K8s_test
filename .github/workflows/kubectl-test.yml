@@ -23,7 +23,7 @@ jobs:
           version: '299.0.0'
 
           project_id: playground-s-11-9150f5a9
-          service_account_key: ${{ secrets.GCP_SECRET] }}
+          service_account_key: ${{ secrets.GCP_SECRET }}
       - name: gcloud authentication
         run: |-
           GCP_CLUSTER="gke_playground-s-11-9150f5a9_us-central1-c_cluster-1"
