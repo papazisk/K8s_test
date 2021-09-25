@@ -21,7 +21,6 @@ jobs:
           GCP_CLUSTER="gke_playground-s-11-9150f5a9_us-central1-c_cluster-1"
           GCP_REGION="us-central1-c"
 
- #         gcloud --quiet auth configure-docker
           gcloud container clusters get-credentials "${GCP_CLUSTER}" --region "${GCP_REGION}"
       - name: Save kubeconfig to github var
         # kubeconfig path is saved as github var to be used by helm
