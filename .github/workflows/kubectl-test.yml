@@ -47,3 +47,7 @@ jobs:
           wget -P /tmp https://get.helm.sh/helm-v3.5.3-linux-amd64.tar.gz
           tar -C /tmp -xvf /tmp/helm-v3.5.3-linux-amd64.tar.gz
           sudo install /tmp/linux-amd64/helm /usr/local/bin/helm
+      - name: Add grafana helm repo
+        run: |-
+          helm repo add grafana https://grafana.github.io/helm-charts
+          helm repo upgrade
