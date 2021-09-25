@@ -44,4 +44,6 @@ jobs:
           kubectl get pods -A
       - name: dependencies
         run: |-
-          .github/scripts/dependencies.sh
+          wget -P /tmp https://get.helm.sh/helm-v3.5.3-linux-amd64.tar.gz
+          tar -C /tmp -xvf /tmp/helm-v3.5.3-linux-amd64.tar.gz
+          sudo install /tmp/linux-amd64/helm /usr/local/bin/helm
