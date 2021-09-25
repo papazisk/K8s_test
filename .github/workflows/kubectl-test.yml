@@ -16,6 +16,14 @@ jobs:
           chmod +x kubectl
           mkdir -p ~/.local/bin/kubectl
           mv ./kubectl ~/.local/bin/kubectl
+      - name: gcloud
+        uses: google-github-actions/setup-gcloud@master
+
+        with:
+          version: '299.0.0'
+
+          project_id: playground-s-11-9150f5a9
+          service_account_key: ${{ secrets.GCP_SECRET] }}
       - name: gcloud authentication
         run: |-
           GCP_CLUSTER="gke_playground-s-11-9150f5a9_us-central1-c_cluster-1"
