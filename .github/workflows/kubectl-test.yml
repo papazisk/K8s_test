@@ -50,4 +50,5 @@ jobs:
       - name: Add grafana helm repo
         run: |-
           helm repo add grafana https://grafana.github.io/helm-charts
-          helm repo upgrade
+          helm repo update
+          helm install grafana
