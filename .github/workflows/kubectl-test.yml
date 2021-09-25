@@ -26,7 +26,7 @@ jobs:
           service_account_key: ${{ secrets.GCP_SECRET }}
       - name: gcloud authentication
         run: |-
-          GCP_CLUSTER="gke_playground-s-11-9150f5a9_us-central1-c_cluster-1"
+          GCP_CLUSTER="cluster-1"
           GCP_REGION="us-central1-c"
 
           gcloud container clusters get-credentials "${GCP_CLUSTER}" --region "${GCP_REGION}"
