@@ -7,8 +7,8 @@ on:
 env:
   VOTTING: 'false'
   GRAFANA: 'false'
-  PROMETHEUS: 'true'
-  KUBE_METRICS: 'true'
+  PROMETHEUS: 'false'
+  KUBE_METRICS: 'false'
 
 jobs:
   test_kubectl:
@@ -32,10 +32,6 @@ jobs:
 
           gcloud container clusters get-credentials "${GCP_CLUSTER}" --region "${GCP_REGION}"
           
-      - name: Install nginx
-        run: |-
-          kubectl apply -f nginx/.
-          
       - name: Install Kube metrics
         if: ${{ env.KUBE_METRICS == 'true' }}
         run: |-          
@@ -43,7 +39,8 @@ jobs:
           
       - name: Install node_exporter
         run: |-          
-          kubectl apply -f node_exporter_install/.
+          ACCOUNT=$(gcloud info --format='value(config.account)')
+          
           
       - name: Install voting_app
         if: ${{ env.VOTTING == 'true' }}
