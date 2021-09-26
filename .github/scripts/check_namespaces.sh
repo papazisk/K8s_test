@@ -2,6 +2,9 @@
 set -eux
 set -o pipefail
 
+MONITORING=12
+VOTING=13
+
 MONITORING=$(kubectl get ns | grep monitoring)
 if [ $? -ne 0 ]; then
   kubectl create ns monitoring
