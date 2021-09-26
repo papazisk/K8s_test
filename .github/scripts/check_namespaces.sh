@@ -6,7 +6,7 @@ set -o pipefail
 #VOTING=13
 
 #MONITORING=$(kubectl get ns | grep monitoring)
-if [ -z $(kubectl get ns | grep monitoring) ]; then
+if [[ -z $(kubectl get ns | grep vote) ]]; then
   kubectl create ns monitoring
 fi
 
