@@ -5,9 +5,8 @@ on:
     
 env:
   VOTTING: 'false'
-  DEPLOY: 'false'
-  RELEASE: 'false'
-  MULTIPLICITY: ''
+  GRAFANA: 'false'
+  PROMETHEUS: 'true'
 
 jobs:
   test_kubectl:
@@ -47,9 +46,15 @@ jobs:
           kubectl apply -f voting_app/.
           
       - name: Install grafana
+        if: ${{ env.GRAFANA == 'true' }}
         run: |-          
           kubectl apply -f grafana_install/. -n monitoring
        
+      - name: Install voting_app
+        if: ${{ env.PROMETHEUS == 'true' }}
+        run: |-
+          kubectl apply -f prometheus_install/.  -n monitoring
+          
       - name: Test kubectl
         run: |
           sudo su
