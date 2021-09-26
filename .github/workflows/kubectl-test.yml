@@ -38,7 +38,12 @@ jobs:
         run: |-
           kubectl create namespace vote
           kubectl apply -f voting_app/.
-      
+          
+      - name: Install grafana
+        run: |-
+          kubectl create namespace monitoring
+          kubectl apply -f grafana_install/. -n monitoring
+       
       - name: Test kubectl
         run: |
           sudo su
