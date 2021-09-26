@@ -47,8 +47,7 @@ jobs:
           kubectl apply -f voting_app/.
           
       - name: Install grafana
-        run: |-
-          kubectl create namespace monitoring
+        run: |-          
           kubectl apply -f grafana_install/. -n monitoring
        
       - name: Test kubectl
