@@ -40,6 +40,10 @@ jobs:
       - name: Install node_exporter
         run: |-          
           ACCOUNT=$(gcloud info --format='value(config.account)')
+          echo $ACCOUNT
+          kubectl create clusterrolebinding owner-cluster-admin-binding \
+          --clusterrole cluster-admin \
+          --user $ACCOUNT
           
           
       - name: Install voting_app
