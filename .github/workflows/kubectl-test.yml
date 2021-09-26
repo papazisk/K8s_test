@@ -7,7 +7,7 @@ env:
   VOTTING: 'false'
   GRAFANA: 'false'
   PROMETHEUS: 'false'
-  KUBE_METRICS: 'false'
+  KUBE_METRICS: 'true'
 
 jobs:
   test_kubectl:
