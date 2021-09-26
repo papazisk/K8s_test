@@ -8,6 +8,7 @@ jobs:
     runs-on: [ ubuntu-latest ]
     steps:
       - uses: actions/checkout@v2
+      
       - name: Install kubectl
         run: |
           echo $PATH
@@ -16,25 +17,29 @@ jobs:
           chmod +x kubectl
           mkdir -p ~/.local/bin/kubectl
           mv ./kubectl ~/.local/bin/kubectl
+      
       - name: gcloud
         uses: google-github-actions/setup-gcloud@master
 
         with:
           version: '299.0.0'
 
-          project_id: playground-s-11-9150f5a9
+          project_id: playground-s-11-66ae0f5d 
           service_account_key: ${{ secrets.GCP_SECRET }}
+      
       - name: gcloud authentication
         run: |-
           GCP_CLUSTER="cluster-1"
           GCP_REGION="us-central1-c"
 
           gcloud container clusters get-credentials "${GCP_CLUSTER}" --region "${GCP_REGION}"
+      
       - name: Save kubeconfig to github var
         # kubeconfig path is saved as github var to be used by helm
         run: |
           echo ${{ secrets.KUBE_CONFIG }} | base64 --decode > $RUNNER_TEMP/config
           echo "kubeconfig=$RUNNER_TEMP/config" >> $GITHUB_ENV
+      
       - name: Test kubectl
         env:
           KUBECONFIG: "${{ env.kubeconfig }}"
@@ -42,14 +47,9 @@ jobs:
           sudo su
           kubectl cluster-info
           kubectl get pods -A
+      
       - name: dependencies
         run: |-
-          wget -P /tmp https://get.helm.sh/helm-v3.5.3-linux-amd64.tar.gz
-          tar -C /tmp -xvf /tmp/helm-v3.5.3-linux-amd64.tar.gz
-          sudo install /tmp/linux-amd64/helm /usr/local/bin/helm
-      - name: Add grafana helm repo
-        run: |-
-          helm repo add bitnami https://charts.bitnami.com/bitnami
-          helm repo update
-          helm install mysite bitnami/drupal
-          helm repo list
+          .github/scripts/dependencies.sh
+      
+
