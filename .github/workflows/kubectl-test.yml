@@ -34,9 +34,9 @@ jobs:
 
           gcloud container clusters get-credentials "${GCP_CLUSTER}" --region "${GCP_REGION}"
           
-      - name: Install Wordpress
+      - name: Install voting_app
         run: |-
-          kubectl apply -f k8s_wordpress/.
+          kubectl apply -f voting_app/.
       
       - name: Test kubectl
         run: |
