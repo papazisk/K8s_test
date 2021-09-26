@@ -33,16 +33,9 @@ jobs:
           GCP_REGION="us-central1-c"
 
           gcloud container clusters get-credentials "${GCP_CLUSTER}" --region "${GCP_REGION}"
-      
-      - name: Save kubeconfig to github var
-        # kubeconfig path is saved as github var to be used by helm
-        run: |
-          echo ${{ secrets.KUBE_CONFIG }} | base64 --decode > $RUNNER_TEMP/config
-          echo "kubeconfig=$RUNNER_TEMP/config" >> $GITHUB_ENV
+            
       
       - name: Test kubectl
-        env:
-          KUBECONFIG: "${{ env.kubeconfig }}"
         run: |
           sudo su
           kubectl cluster-info
