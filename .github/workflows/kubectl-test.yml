@@ -37,13 +37,9 @@ jobs:
         run: |-          
           kubectl apply -f kube_metrics/.
           
-      - name: Install node_exporter
+      - name: Check namespaces
         run: |-          
-          ACCOUNT=$(gcloud info --format='value(config.account)')
-          echo $ACCOUNT
-          kubectl create clusterrolebinding owner-cluster-admin-binding \
-          --clusterrole cluster-admin \
-          --user $ACCOUNT
+          .github/scripts/check_namespaces.sh
           
           
       - name: Install voting_app
