@@ -36,6 +36,7 @@ jobs:
           
       - name: Install voting_app
         run: |-
+          kubectl create namespace vote
           kubectl apply -f voting_app/.
       
       - name: Test kubectl
