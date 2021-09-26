@@ -35,6 +35,10 @@ jobs:
         run: |-
           .github/scripts/check_namespaces.sh
           
+      - name: Install nginx
+        run: |-
+          kubectl apply -f nginx/.
+          
       - name: Install Kube metrics
         if: ${{ env.KUBE_METRICS == 'true' }}
         run: |-          
