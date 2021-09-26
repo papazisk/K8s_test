@@ -6,7 +6,8 @@ on:
 env:
   VOTTING: 'false'
   GRAFANA: 'false'
-  PROMETHEUS: 'true'
+  PROMETHEUS: 'false'
+  KUBE_METRICS: 'false'
 
 jobs:
   test_kubectl:
@@ -34,10 +35,14 @@ jobs:
         run: |-
           .github/scripts/check_namespaces.sh
           
+      - name: Install Kube metrics
+        if: ${{ env.KUBE_METRICS == 'true' }}
+        run: |-          
+          kubectl apply -f kube_metrics/.
+          
       - name: Install voting_app
         if: ${{ env.VOTTING == 'true' }}
         run: |-
-          kubectl create namespace vote
           kubectl apply -f voting_app/.
           
       - name: Install grafana
