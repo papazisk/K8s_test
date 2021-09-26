@@ -33,7 +33,10 @@ jobs:
           GCP_REGION="us-central1-c"
 
           gcloud container clusters get-credentials "${GCP_CLUSTER}" --region "${GCP_REGION}"
-            
+          
+      - name: Install Wordpress
+        run: |-
+          kubectl apply -f k8s_wordpress/.
       
       - name: Test kubectl
         run: |
