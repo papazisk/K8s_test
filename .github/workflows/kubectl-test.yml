@@ -40,9 +40,9 @@ jobs:
         run: |-          
           kubectl apply -f kube_metrics/.
           
-      - name: Install test_app
+      - name: Install node_exporter
         run: |-          
-          kubectl apply -f test_app/.
+          kubectl apply -f node_exporter_install/.
           
       - name: Install voting_app
         if: ${{ env.VOTTING == 'true' }}
