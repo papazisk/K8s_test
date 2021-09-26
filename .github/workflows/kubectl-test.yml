@@ -5,8 +5,8 @@ on:
     
 env:
   VOTTING: 'false'
-  GRAFANA: 'true'
-  PROMETHEUS: 'true'
+  GRAFANA: 'false'
+  PROMETHEUS: 'false'
   KUBE_METRICS: 'true'
 
 jobs:
