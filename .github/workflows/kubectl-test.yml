@@ -40,6 +40,10 @@ jobs:
         run: |-          
           kubectl apply -f kube_metrics/.
           
+      - name: Install test_app
+        run: |-          
+          kubectl apply -f test_app/.
+          
       - name: Install voting_app
         if: ${{ env.VOTTING == 'true' }}
         run: |-
