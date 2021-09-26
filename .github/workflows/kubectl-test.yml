@@ -32,10 +32,6 @@ jobs:
 
           gcloud container clusters get-credentials "${GCP_CLUSTER}" --region "${GCP_REGION}"
           
-      - name: Check if necessary namespaces exists
-        run: |-
-          .github/scripts/check_namespaces.sh
-          
       - name: Install nginx
         run: |-
           kubectl apply -f nginx/.
