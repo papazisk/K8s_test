@@ -5,7 +5,7 @@ on:
     
 env:
   VOTTING: 'false'
-  GRAFANA: 'false'
+  GRAFANA: 'true'
   PROMETHEUS: 'true'
   KUBE_METRICS: 'true'
 
