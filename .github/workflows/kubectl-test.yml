@@ -1,7 +1,13 @@
-name: Test kubectl
+name: main
 on:
   push:
     branches: [ main ]
+    
+env:
+  VOTTING: 'false'
+  DEPLOY: 'false'
+  RELEASE: 'false'
+  MULTIPLICITY: ''
 
 jobs:
   test_kubectl:
@@ -35,6 +41,7 @@ jobs:
           gcloud container clusters get-credentials "${GCP_CLUSTER}" --region "${GCP_REGION}"
           
       - name: Install voting_app
+      if: ${{ env.VOTTING == 'true' }}
         run: |-
           kubectl create namespace vote
           kubectl apply -f voting_app/.
